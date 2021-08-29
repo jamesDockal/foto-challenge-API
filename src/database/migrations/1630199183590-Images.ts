@@ -14,6 +14,11 @@ export class Images1630199183590 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: "image_url",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
             name: "image",
             type: "mediumblob",
             isNullable: false,

@@ -6,15 +6,16 @@ import { ImagesMiddleware } from "../middlewares/Images";
 
 const imagesRoutes = Router();
 
-const { createImageWithRef, getAllImages, deleteImage } =
+const { saveImage, getAllImages, deleteImage, getImageById } =
   new ImagesController();
 
 const { imageExists } = new ImagesMiddleware();
 
-imagesRoutes.post("/", multer(multerConfig).single("file"), createImageWithRef);
-
 imagesRoutes.get("/", getAllImages);
+imagesRoutes.get("/:id", getImageById);
 
-imagesRoutes.delete("/:title", imageExists, deleteImage);
+imagesRoutes.post("/", multer(multerConfig).single("file"), saveImage);
+
+imagesRoutes.delete("/:id", imageExists, deleteImage);
 
 export { imagesRoutes };

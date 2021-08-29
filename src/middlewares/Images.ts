@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-
-import fs from "fs";
-import path from "path";
+import { getRepository } from "typeorm";
+import Images from "../entities/Images";
 
 class ImagesMiddleware {
   async imageExists(req: Request, res: Response, next: NextFunction) {
-    const { title } = req.params;
-    const url = path.resolve(__dirname, "..", "..", "images", title);
+    const { id } = req.params;
 
-    const imageExists = fs.existsSync(url);
+    const imagesRepository = getRepository(Images);
+    const imageExists = await imagesRepository.findOne({ id });
+
     if (!imageExists) {
       return res.status(404).json({ error: "Image not exits!" });
     }

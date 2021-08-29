@@ -6,6 +6,9 @@ class Images {
   id: string;
 
   @Column()
+  image_url: string;
+
+  @Column()
   image: string;
 }
 
